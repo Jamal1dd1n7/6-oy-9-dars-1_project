@@ -1,5 +1,7 @@
 from django.db import models
-
+from PIL import Image
+from django.core.validators import MinValueValidator
+from django.contrib.auth.models import User
 class Course(models.Model):
     title = models.CharField(max_length=255)
     teacher = models.CharField(max_length=255, null=True)
@@ -19,3 +21,17 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.title
+
+class Comment(models.Model):
+    text = models.TextField(max_length=1000, verbose_name="Matni")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Muallif")
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="Dars mavzusi")
+    created = models.DateTimeField(auto_now_add=models.CASCADE, verbose_name="Yaratilgan")
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = "Izoh "
+        verbose_name_plural = "Izohlar"
+        ordering = ['-id']

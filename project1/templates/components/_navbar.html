@@ -27,21 +27,56 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <a href="{% url 'add_course' %}" class="btn btn-link px-3 me-2">Kurs qo`shish</a>
             </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <a href="{% url 'add_lesson' %}" class="btn btn-link px-3 me-2">Dars qo`shish</a>
+            </ul>
             <div class="d-flex align-items-center">
-                <button data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2">
-                    Login
-                </button>
-                <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
-                    Sign up for free
-                </button>
-                <a
-                    data-mdb-ripple-init
-                    class="btn btn-dark px-3"
-                    href="https://github.com/mdbootstrap/mdb-ui-kit"
-                    role="button"
-                    ><i class="fab fa-github"></i
-                ></a>
+                {% if request.user.is_authenticated %}
+
+                <!-- Container for search and avatar -->
+                <div class="d-flex align-items-center justify-content-end w-100">
+        
+                    <!-- Search -->
+                    <form class="d-flex input-group w-auto me-3">
+                </span>
+                    </form>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <a href="{% url 'logout' %}" class="btn btn-link px-3 me-2">Log Out</a>
+                    </ul>
+        
+                    <!-- Avatar -->
+                    <div class="dropdown">
+                        <a
+                                data-mdb-dropdown-init
+                                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                href="#"
+                                id="navbarDropdownMenuAvatar"
+                                role="button"
+                                aria-expanded="false"
+                        >
+                            <img
+                                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                    class="rounded-circle"
+                                    height="35"
+                                    alt="Black and White Portrait of a Man"
+                                    loading="lazy"
+                            />
+                        </a>
+                    </div>
+                </div>
+        
+                {% else %}
+        
+                <div class="d-flex align-items-center">
+                    <a href="{% url 'login' %}" data-mdb-ripple-init type="button" class="btn btn-link px-3 me-2">
+                        Kirish
+                    </a>
+                    <a href="{% url 'register' %}" data-mdb-ripple-init type="button" class="btn btn-primary me-3">
+                        Ro'yxatdan o'tish
+                    </a>
+                </div>
+        
+                {% endif %}
+                <button id="switch" class="d-flex align-items-center">Toggle</button>
             </div>
-        </div>
-    </div>
-</nav>
+        </nav>
